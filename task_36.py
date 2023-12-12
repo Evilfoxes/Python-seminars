@@ -1,10 +1,37 @@
-# Определить индексы элементов массива (списка), значения которых принадлежат заданному диапазону 
-# (т.е. не меньше заданного минимума и не больше заданного максимума).
-# На вход подается список с элементамиlist_1 и границы диапазона в виде чисел min_number, max_number.
+# Напишите функцию print_operation_table(operation, num_rows, num_columns), которая принимает в
+# качестве аргумента функцию, вычисляющую элемент по номеру строки и столбца.
+# Аргументы num_rows и num_columns указывают число строк и столбцов таблицы, которые должны быть распечатаны.
+# Нумерация строк и столбцов идет с единицы (подумайте, почему не с нуля).
+# Если строк меньше двух, выдайте текст
+# ОШИБКА! Размерности таблицы должны быть больше 2!.
 
-list_1 = [-5, 9, 0, 3, -1, -2, 1, 4, -2, 10, 2, 0, -9, 8, 10, -9, 0, -5, -5, 7]
-min_number = 0
-max_number = 10
+# Примечание: бинарной операцией называется любая операция, у которой ровно два аргумента, как, например,
+# у операции умножения.
 
-indexes = [index for index, element in enumerate(list_1) if min_number <= element <= max_number]
-print(*indexes, sep='\n')
+# На входе:
+# print_operation_table(lambda x, y: x * y, 3, 3)
+
+# На выходе:
+# 1 2 3
+# 2 4 6
+# 3 6 9
+
+
+def print_operation_table(operation, num_rows, num_columns):
+    if num_rows < 2:
+        print('ОШИБКА! Размерности таблицы должны быть больше 2!')
+        return
+
+    line = []
+    for i in range(1, num_columns+1):
+        line.append(i)
+    print(*line)
+
+    for row in range(2, num_rows+1):
+        line = [row,]
+        for col in range(2, num_columns+1):
+            line.append(operation(row, col))
+        print(*line)
+
+
+print_operation_table(lambda x, y: x / y, 4, 4)
